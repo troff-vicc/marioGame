@@ -38,6 +38,11 @@ class Mario(pygame.sprite.Sprite):
         self.rect.y = 192 * 45 / 16
         self.vx = 3.75
         self.vy = 3.75
+class Ground(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = ground
+        self.rect = self.image.get_rect()
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, meaning):
         pygame.sprite.Sprite.__init__(self)
@@ -76,17 +81,24 @@ pygame.display.set_caption("Mario")
 #   Создание спрайтов
 
 all_sprites_list = pygame.sprite.Group()
+ground_sprites = pygame.sprite.Group()
 
 matrix = physics.main()
 listSprite = []
 for y in range(len(matrix)):
     for x in range(len(matrix[y])):
-        object = Sprite(matrix[y][x])
-        if object.not0:
+        if matrix[y][x] == 1:
+            object = Ground()
             object.rect.x = x * 45
             object.rect.y = y * 45
-            listSprite.append(matrix[y][x])
-            all_sprites_list.add(object)
+            ground_sprites.add(object)
+        else:
+            object = Sprite(matrix[y][x])
+            if object.not0:
+                object.rect.x = x * 45
+                object.rect.y = y * 45
+                listSprite.append(matrix[y][x])
+                all_sprites_list.add(object)
 
 mario = Mario()
 mario_group = pygame.sprite.Group()
@@ -105,6 +117,7 @@ while running:
     mario_group.draw(screen)
     all_sprites_list.draw(screen)
     all_sprites_list.update()
+    ground_sprites.draw(screen)
     pygame.display.update()
     clock.tick(FPS)
 pygame.quit()
