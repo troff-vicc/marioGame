@@ -17,13 +17,13 @@ mario1 = pygame.transform.scale(mario1, (45, 45))
 ground = pygame.image.load('tecsture/ground.png')
 ground = pygame.transform.scale(ground, (45, 45))
 
-question = pygame.image.load('tecsture/?.png')
+question = pygame.image.load('tecsture/question.png')
 question = pygame.transform.scale(question, (45, 45))
 
-question1 = pygame.image.load('tecsture/?1.png')
+question1 = pygame.image.load('tecsture/question1.png')
 question1 = pygame.transform.scale(question1, (45, 45))
 
-question2 = pygame.image.load('tecsture/?2.png')
+question2 = pygame.image.load('tecsture/question2.png')
 question2 = pygame.transform.scale(question2, (45, 45))
 
 brick = pygame.image.load('tecsture/brick.png')
@@ -46,7 +46,7 @@ class Sprite(pygame.sprite.Sprite):
             self.image = ground
             self.rect = self.image.get_rect()
             self.not0 = True
-        elif meaning == 2:
+        if meaning == 2:
             self.image = brick
             self.rect = self.image.get_rect()
             self.not0 = True
@@ -73,9 +73,10 @@ pygame.init()
 screen = pygame.display.set_mode((720, 720))
 pygame.display.set_caption("Mario")
 
+#   Создание спрайтов
+
 all_sprites_list = pygame.sprite.Group()
 
-#   Создание спрайтов
 matrix = physics.main()
 listSprite = []
 for y in range(len(matrix)):
