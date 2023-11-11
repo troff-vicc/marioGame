@@ -28,6 +28,9 @@ question2 = pygame.transform.scale(question2, (45, 45))
 
 brick = pygame.image.load('tecsture/brick.png')
 brick = pygame.transform.scale(brick, (45, 45))
+
+pipe = pygame.image.load('tecsture/pipe.png')
+pipe = pygame.transform.scale(pipe, (90, 90))
 #   Классы объектов
 class Mario(pygame.sprite.Sprite):
     def __init__(self):
@@ -35,7 +38,7 @@ class Mario(pygame.sprite.Sprite):
         self.image = mario1
         self.rect = self.image.get_rect()
         self.rect.x = 32 * 45 / 16
-        self.rect.y = 192 * 45 / 16
+        self.rect.y = 208 * 45 / 16
         self.vx = 3.75
         self.vy = 3.75
 class Ground(pygame.sprite.Sprite):
@@ -57,6 +60,10 @@ class Sprite(pygame.sprite.Sprite):
             self.not0 = True
         elif meaning == 3:
             self.image = question
+            self.rect = self.image.get_rect()
+            self.not0 = True
+        elif meaning == 4:
+            self.image = pipe
             self.rect = self.image.get_rect()
             self.not0 = True
         else:
