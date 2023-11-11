@@ -1,4 +1,5 @@
 def completionMatrix1(matrix):
+    #создание 1го уровня
     for j in range(3):
         for i in range(len(matrix[13 + j])):
             matrix[13 + j][i] = 1
